@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Mn+6GBpEfOmZPhuXdsgNlqwO5RKka1eOMZzy8X1FH+Q=",
+  "Source": "gamespace-server",
+  "BasePath": "_content/gamespace-server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
