@@ -30,3 +30,7 @@ D:\workD\gamespace-server\obj\Debug\net8.0\refint\gamespace-server.dll
 D:\workD\gamespace-server\obj\Debug\net8.0\gamespace-server.pdb
 D:\workD\gamespace-server\obj\Debug\net8.0\gamespace-server.genruntimeconfig.cache
 D:\workD\gamespace-server\obj\Debug\net8.0\ref\gamespace-server.dll
+D:\workD\gamespace-server\obj\Debug\net8.0\gamespace-server.sourcelink.json
+D:\workD\gamespace-server\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\workD\gamespace-server\bin\Debug\net8.0\DotNetEnv.dll
+D:\workD\gamespace-server\bin\Debug\net8.0\Sprache.dll
