@@ -26,8 +26,9 @@ public class GamesController : ControllerBase
         using (var client = new HttpClient())
         {
             var url = "https://api.igdb.com/v4/games";
-            var dataToSend = new StringContent("fields name, involved_companies; search \"Halo\";", Encoding.UTF8, "application/json");
-            // client.BaseAddress = new Uri(url);
+            var fields = "fields name,cover.url,rating; where first_release_date >= 1693540800 & rating >= 80 & platforms = (6, 130, 167, 169) & themes != (42); sort rating desc; limit 8;"
+            var dataToSend = new StringContent(fields, Encoding.UTF8, "application/json");
+
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Add("Authorization", Environment.GetEnvironmentVariable("ACCESS_TOKEN"));
             client.DefaultRequestHeaders.Add("Client-ID", Environment.GetEnvironmentVariable("CLIENT_ID"));
