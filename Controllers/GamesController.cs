@@ -25,8 +25,13 @@ public class GamesController : ControllerBase
 
         using (var client = new HttpClient())
         {
+            //Calculate unix time from 4 months ago to display recently popular titles.
+            DateTime currentTime = DateTime.UtcNow;
+            long unixTime = ((DateTimeOffset)currentTime).ToUnixTimeSeconds();
+            unixTime = unixTime - 10520000; //4 Months Ago
+
             var url = "https://api.igdb.com/v4/games";
-            var fields = "fields name,cover.image_id,rating; where first_release_date >= 1693540800 & rating >= 80 & platforms = (6, 130, 167, 169) & themes != (42); sort rating desc; limit 8;";
+            var fields = $"fields name,cover.image_id,rating; where first_release_date >= {unixTime} & rating >= 80 & platforms = (6, 130, 167, 169) & themes != (42); sort rating desc; limit 8;";
             var dataToSend = new StringContent(fields, Encoding.UTF8, "application/json");
 
             client.DefaultRequestHeaders.Accept.Clear();
