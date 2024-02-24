@@ -9,24 +9,29 @@ namespace gamespace_server.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class GamesController : ControllerBase
+public class PopularGamesController : ControllerBase
 {
-    private readonly ILogger<GamesController> _logger;
+    private readonly ILogger<PopularGamesController> _logger;
 
-    public GamesController(ILogger<GamesController> logger)
+    public PopularGamesController(ILogger<PopularGamesController> logger)
     {
         _logger = logger;
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<GamesResponse>> Get(int id)
+    [HttpGet]
+    public async Task<ActionResult<GamesResponse>> Get()
     {
         DotNetEnv.Env.Load();
 
         using (var client = new HttpClient())
         {
+            //Calculate unix time from 4 months ago to display recently popular titles.
+            DateTime currentTime = DateTime.UtcNow;
+            long unixTime = ((DateTimeOffset)currentTime).ToUnixTimeSeconds();
+            unixTime = unixTime - 10520000; //4 Months Ago
+
             var url = "https://api.igdb.com/v4/games";
-            var fields = $"fields name,cover.image_id,rating,genres.name,platforms.name,similar_games,summary,videos.video_id,websites.url; where id = {id};";
+            var fields = $"fields name,cover.image_id,rating; where first_release_date >= {unixTime} & rating >= 80 & platforms = (6, 130, 167, 169) & themes != (42); sort rating desc; limit 8;";
             var dataToSend = new StringContent(fields, Encoding.UTF8, "text/plain");
 
             client.DefaultRequestHeaders.Accept.Clear();
@@ -39,7 +44,7 @@ public class GamesController : ControllerBase
             {
                 string jsondata = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(jsondata);
-                // var responseData = JsonConvert.DeserializeObject<GamesResponse>(jsondata);
+                // var responseData = JsonConvert.DeserializeObject<Games>(jsondata);
                 return Ok(jsondata);
             } else {
                 return StatusCode((int)response.StatusCode, response.ReasonPhrase);
