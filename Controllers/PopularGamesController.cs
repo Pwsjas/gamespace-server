@@ -31,7 +31,7 @@ public class PopularGamesController : ControllerBase
             unixTime = unixTime - 10520000; //4 Months Ago
 
             var url = "https://api.igdb.com/v4/games";
-            var fields = $"fields name,cover.image_id,rating; where first_release_date >= {unixTime} & rating >= 80 & platforms = (6, 130, 167, 169) & themes != (42); sort rating desc; limit 8;";
+            var fields = $"fields name,cover.image_id,rating,genres.name; where first_release_date >= {unixTime} & rating >= 80 & platforms = (6, 130, 167, 169) & themes != (42); sort rating desc; limit 8;";
             var dataToSend = new StringContent(fields, Encoding.UTF8, "text/plain");
 
             client.DefaultRequestHeaders.Accept.Clear();

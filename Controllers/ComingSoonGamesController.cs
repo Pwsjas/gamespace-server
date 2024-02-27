@@ -29,8 +29,8 @@ public class ComingSoonGamesController : ControllerBase
             DateTime currentTime = DateTime.UtcNow;
             long unixTime = ((DateTimeOffset)currentTime).ToUnixTimeSeconds();
 
-            var url = "https://api.igdb.com/v4/release_dates";
-            var fields = $"fields game.name,game.cover.image_id,game.rating,game.genres.name; where platform = (6, 130, 167, 169) & date > {unixTime} & region = 2 & game.themes != (42); sort date asc;";
+            var url = "https://api.igdb.com/v4/games";
+            var fields = $"fields name,cover.image_id,rating,genres.name; where platforms = (6, 130, 167, 169) & first_release_date > {unixTime} & themes != (42); sort first_release_date asc; limit 8;";
             var dataToSend = new StringContent(fields, Encoding.UTF8, "text/plain");
 
             client.DefaultRequestHeaders.Accept.Clear();
