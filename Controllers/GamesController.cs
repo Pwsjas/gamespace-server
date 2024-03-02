@@ -26,7 +26,7 @@ public class GamesController : ControllerBase
         using (var client = new HttpClient())
         {
             var url = "https://api.igdb.com/v4/games";
-            var fields = $"fields name,cover.image_id,rating,genres.name,platforms.name,similar_games,summary,videos.video_id,websites.url; where id = {id};";
+            var fields = $"fields name,cover.image_id,rating,genres.name,platforms.name,similar_games,summary,videos.video_id,websites.url,screenshots.image_id,artworks.image_id; where id = {id};";
             var dataToSend = new StringContent(fields, Encoding.UTF8, "text/plain");
 
             client.DefaultRequestHeaders.Accept.Clear();
