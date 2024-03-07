@@ -30,7 +30,7 @@ public class SimilarGamesController : ControllerBase
             var url = "https://api.igdb.com/v4/games";
             // Construct the fields query using the list of IDs from the request body
             var idList = string.Join(",", request.Ids); // Converts List<int> to a comma-separated string
-            var fields = $"fields name,cover.image_id,rating,genres.name,platforms.name,similar_games,summary,videos.video_id,websites.url,screenshots.image_id,artworks.image_id; where id = ({idList});";
+            var fields = $"fields name,cover.image_id,rating,genres.name; where id = ({idList}); limit 8;";
             var dataToSend = new StringContent(fields, Encoding.UTF8, "text/plain");
 
             client.DefaultRequestHeaders.Accept.Clear();
