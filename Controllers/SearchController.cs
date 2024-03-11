@@ -52,7 +52,6 @@ public class SearchController : ControllerBase
             }
 
             var fields = $"fields name,cover.image_id,rating,genres.name; where themes != (42){filters}; limit 20;";
-            Console.WriteLine(fields);
             var dataToSend = new StringContent(fields, Encoding.UTF8, "text/plain");
 
             client.DefaultRequestHeaders.Accept.Clear();
